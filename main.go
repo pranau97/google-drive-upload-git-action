@@ -48,7 +48,7 @@ func uploadToDrive(svc *drive.Service, filename string, folderId string, driveFi
 			MimeType: mimeType,
 			DriveId:  githubactions.GetInput(driveIdInput),
 		}
-		_, err = svc.Files.Update(driveFile.Id, f).AddParents(folderId).Media(file).Do()
+		_, err = svc.Files.Update(driveFile.Id, f).AddParents(folderId).Media(file).SupportsAllDrives(true).Do()
 	} else {
 		f := &drive.File{
 			Name:     name,
@@ -56,7 +56,7 @@ func uploadToDrive(svc *drive.Service, filename string, folderId string, driveFi
 			Parents:  []string{folderId},
 			DriveId:  githubactions.GetInput(driveIdInput),
 		}
-		_, err = svc.Files.Create(f).Media(file).Do()
+		_, err = svc.Files.Create(f).Media(file).SupportsAllDrives(true).Do()
 	}
 
 	if err != nil {
