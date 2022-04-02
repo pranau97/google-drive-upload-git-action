@@ -28,6 +28,7 @@ const (
 	filenameInput         = "filename"
 	nameInput             = "name"
 	folderIdInput         = "folderId"
+	driveIdInput          = "driveId"
 	credentialsInput      = "credentials"
 	overwrite             = "false"
 	mimeTypeInput         = "mimeType"
@@ -45,6 +46,7 @@ func uploadToDrive(svc *drive.Service, filename string, folderId string, driveFi
 		f := &drive.File{
 			Name:     name,
 			MimeType: mimeType,
+			DriveId:  githubactions.GetInput(driveIdInput),
 		}
 		_, err = svc.Files.Update(driveFile.Id, f).AddParents(folderId).Media(file).Do()
 	} else {
@@ -52,6 +54,7 @@ func uploadToDrive(svc *drive.Service, filename string, folderId string, driveFi
 			Name:     name,
 			MimeType: mimeType,
 			Parents:  []string{folderId},
+			DriveId:  githubactions.GetInput(driveIdInput),
 		}
 		_, err = svc.Files.Create(f).Media(file).Do()
 	}
