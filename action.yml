@@ -1,6 +1,6 @@
 name: 'google-drive-upload-git-action'
 description: 'Upload files to Google Drive'
-author: 'Aditya Karnam Gururaj Rao'
+author: 'Pranau Kumar'
 branding:
   icon: 'archive'
   color: 'green'
